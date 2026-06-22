@@ -19,8 +19,6 @@ When I first ran the game it looked polished but the logic was off. The hints we
 
 ## 2. How did you use AI as a teammate?
 
-## 2. How did you use AI as a teammate?
-
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
 
 I used Claude Code inside VS Code as my main AI coding assistant. I attached app.py and logic_utils.py to give it context about my project, then described the bug I observed and asked it to explain the cause.
@@ -38,9 +36,16 @@ Claude noted that logic_utils.py had an unimplemented stub where check_guess rai
 ## 3. Debugging and testing your fixes
 
 - How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
+
+I decided a bug was fixed when the game behaved as expected in the live app and when the pytest tests passed. For the hint bug, I verified by playing the game and confirming that guessing higher than the secret said "Go LOWER" and guessing lower said "Go HIGHER."
+
+- Describe at least one test you ran (manual or using pytest) and what it showed you about your code.
+
+I ran pytest on tests/test_game_logic.py and all 3 tests passed — one for Too High, one for Too Low, and one for a correct guess. This confirmed the check_guess logic was working correctly after the refactor into logic_utils.py.
+
 - Did AI help you design or understand any tests? How?
+
+Yes, Claude Code generated the pytest test cases for me. It explained that check_guess returns a tuple of (outcome, message) and wrote tests that unpacked the tuple and asserted on the outcome value. I verified the tests made sense before accepting them.
 
 ---
 
@@ -48,11 +53,20 @@ Claude noted that logic_utils.py had an unimplemented stub where check_guess rai
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
+Streamlit reruns the entire Python script from top to bottom every time a user clicks a button or changes an input. This means regular variables reset to their default values on every interaction. Session state is like a special storage box that survives these reruns — anything you store in st.session_state keeps its value between clicks. That's why the New Game button was broken — it wasn't properly clearing the session state values like the secret number and attempt count.
+
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+I want to keep using the habit of describing bugs precisely before asking AI for help — including what I expected, what actually happened, and what input I used. This made Claude Code's explanations much more accurate and useful than if I had just said "something is broken."
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+
+Next time I would verify AI suggestions by reading the code myself before accepting changes, especially when the AI is modifying multiple files at once. I learned that AI can look confident even when it's making assumptions about the intended behavior.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+This project showed me that AI-generated code can look polished and complete while having serious logic bugs underneath. I now know to treat AI output as a starting point that needs testing and verification, not a finished product.

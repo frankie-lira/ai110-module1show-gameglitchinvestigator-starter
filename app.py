@@ -30,6 +30,7 @@ def parse_guess(raw: str):
 
     return True, value, None
 
+# FIX: Added max(0, ...) floor to prevent score going negative. Fixed with Claude Code.
 # FIXME: The score was being tracked incorrectly.
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
