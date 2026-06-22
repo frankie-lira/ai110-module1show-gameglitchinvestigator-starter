@@ -38,8 +38,11 @@ It wrote the code, ran away, and now the game is unplayable.
 5. Score updates to 30 and game displays "You won! The secret was 21."
 
 ## 🧪 Test Results
-tests/test_game_logic.py::test_winning_guess PASSED                [ 33%]
-tests/test_game_logic.py::test_guess_too_high PASSED               [ 66%]
-tests/test_game_logic.py::test_guess_too_low PASSED                [100%]
+
+```
+tests/test_game_logic.py::test_winning_guess PASSED     [ 33%]
+tests/test_game_logic.py::test_guess_too_high PASSED    [ 66%]
+tests/test_game_logic.py::test_guess_too_low PASSED     [100%]
 
 ======================================== 3 passed in 0.01s ========================================
+```
