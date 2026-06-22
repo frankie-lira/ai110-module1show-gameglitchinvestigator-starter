@@ -4,27 +4,34 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 ## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
-  (for example: "the hints were backwards").
+When I first ran the game it looked polished but the logic was off. The hints were backwards — guessing a very low number like -100 still said "Go LOWER!" instead of "Go HIGHER." The New Game button didn't reset the game. The score also went negative which didn't seem right for a guessing game.
 
 **Bug Reproduction Log**
 
-Document at least 3 bugs you found. Add rows as needed.
-
 | Input | Expected Behavior | Actual Behavior | Console Output / Error |
 |-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Guessed -100 (secret was 47) | "Go HIGHER" hint | "Go LOWER!" shown | none |
+| Played several rounds | Score stays positive | Score went to -20 | none |
+| Clicked "New Game" button | Game resets with new number | Nothing happened | none |
+| Played 8 attempts, all wrong guesses | Score stays at 0 or positive | Score went to -25 | none |
 
 ---
 
 ## 2. How did you use AI as a teammate?
 
+## 2. How did you use AI as a teammate?
+
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
+
+I used Claude Code inside VS Code as my main AI coding assistant. I attached app.py and logic_utils.py to give it context about my project, then described the bug I observed and asked it to explain the cause.
+
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+
+Claude Code correctly identified that the hint messages in app.py lines 32-47 were swapped — "Go HIGHER" was returned when the guess was too high, and "Go LOWER" was returned when the guess was too low. I verified this by reading the code myself and confirming the conditions matched exactly what Claude described.
+
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+
+Claude noted that logic_utils.py had an unimplemented stub where check_guess raises NotImplementedError, meaning the actual game logic runs from app.py instead. I hadn't noticed that both files had a function with the same name, so I had to read both files carefully to verify this was true before trusting Claude's explanation.
 
 ---
 
